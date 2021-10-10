@@ -1,38 +1,57 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const runImage = keyframes`
+  from {
+    margin-left: 100%
+  }
+
+  to {
+    margin-left: 0%
+  }
+`
+
 export const TinderWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: 6px;
+
   .card {
-    background-color: lightgray;
-    width: 80vw;
-    max-width: 260px;
-    height: 300px;
-    border-radius: 20px;
+    background-color: black;
+    width: 100%;
+    height: 420px;
     background-size: cover;
     background-position: center;
   }
   img {
     width: 100%;
-    height: 100&;
+    height: 100%;
     object-fit: cover;
   }
   .detail {
-    border-radius: 50px;
-    font-size: 12px;
-    margin: 0;
-    color: red;
+    font-size: 16px;
+    margin: 5px;
+    color: #3f51b5;
     padding: 4px 10px;
+    text-align: left;
+    font-weight: 500;
   }
 
   .buttons {
     display: flex;
-    margin-top: 16px;
+    margin: 16px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     button {
       display: flex;
       cursor: pointer;
-      padding: 10px;
+      justify-content: center;
       border-radius: 50%;
+      align-items: center;
       width: 50px;
       height: 50px;
       border: none;
@@ -40,12 +59,15 @@ export const TinderWrapper = styled.div`
       font-size: 18px;
       background-color: white;
       transition: 200ms;
-      margin: 0 10px;
       font-weight: bold;
       box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+      margin-right: 16px;
     }
     button:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
+  }
+  .img-appear {
+    animation: ${runImage} 2s;
   }
 `

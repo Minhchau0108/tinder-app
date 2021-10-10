@@ -12,13 +12,13 @@ const Alert = () => {
         containerStyle={{}}
         toastOptions={{
           className: '',
-          duration: 1000,
+          duration: 2000,
           style: {
             background: '#363636',
             color: '#fff',
           },
           success: {
-            duration: 1000,
+            duration: 2000,
             icon: '👏',
             theme: {
               primary: 'green',
@@ -26,7 +26,7 @@ const Alert = () => {
             },
           },
           error: {
-            duration: 1000,
+            duration: 2000,
             icon: '💔',
             theme: {
               primary: 'green',

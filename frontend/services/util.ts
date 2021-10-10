@@ -9,13 +9,10 @@ export const calculateAge = (dob: string) => {
 export const formatUser = (user: UserApi) => {
   if (!user) return {} as User
   return {
-    id: user.id,
+    id: user._id,
     firstName: user.firstName,
     lastName: user.lastName,
     picture: user.picture,
     age: user.dateOfBirth ? calculateAge(user.dateOfBirth) : undefined,
   }
-}
-export const getRandom = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min
 }

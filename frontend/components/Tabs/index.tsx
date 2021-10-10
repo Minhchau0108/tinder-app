@@ -22,7 +22,8 @@ const Tabs = ({ tabContent, onChange, activeTab }: Props) => {
           key={`tab-${i}`}
           onClick={() => onChange(i)}
         >
-          {tab.icon} {tab.name}
+          <div>{tab.icon}</div>
+          <div> {tab.name}</div>
         </StyledTab>
       ))}
     </StyledTabs>

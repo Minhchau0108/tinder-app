@@ -6,7 +6,7 @@ export type User = {
   age?: number
 }
 export type UserApi = {
-  id: string
+  _id: string
   firstName: string
   lastName: string
   picture: string

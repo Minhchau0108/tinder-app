@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import api from '../../services/apiService'
 import { formatUser } from '../../services/util'
-import { User } from '../../interfaces/type'
+import { Response, User } from '../../interfaces/type'
 import { TinderWrapper } from './index.styled'
+import { AppContext } from '../../state/appContext'
+import toast from 'react-hot-toast'
 
 type Props = {
   userId?: string
-  onLike: (user: User) => void
-  onPass: (user: User) => void
+  onNext: () => void
 }
+const LIKE = 'like'
+const MATCH = 'match'
 
-const TinderCard = ({ userId, onLike, onPass }: Props) => {
+const TinderCard = ({ userId, onNext }: Props) => {
+  const { state } = useContext(AppContext)
+  const { currentUserId } = state
   const [user, setUser] = useState({} as User)
   const [isLoading, setIsLoading] = useState(false)
+  const [imgClass, setImgClass] = useState('')
   useEffect(() => {
     if (!userId) {
       return
@@ -20,8 +26,8 @@ const TinderCard = ({ userId, onLike, onPass }: Props) => {
     const getDetailUser = async (userId: string) => {
       setIsLoading(true)
       try {
-        const response = await api.get(`/user/${userId}`)
-        const user = formatUser(response.data)
+        const response: Response = await api.get(`/user/${userId}`)
+        const user = formatUser(response.data.data.user)
         setUser(user)
       } catch (error) {
         setUser({} as User)
@@ -30,12 +36,42 @@ const TinderCard = ({ userId, onLike, onPass }: Props) => {
     }
     getDetailUser(userId)
   }, [userId])
-  const handleLike = () => {
-    onLike(user)
+  const handleLike = async () => {
+    try {
+      const response: Response = await api.post(`/user/like`, {
+        currentUserId,
+        userId,
+      })
+      const result = response.data.data.result
+      if (result === LIKE) {
+        toast.success(`Like user successfully !`)
+      }
+      if (result === MATCH) {
+        toast.success(`New matching !!! `)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    onNext()
   }
-  const handlePass = () => {
-    onPass(user)
+  const handlePass = async () => {
+    try {
+      const response: Response = await api.post(`/user/pass`, {
+        currentUserId,
+        userId,
+      })
+      toast.error(`Not feeling good. Keep discovering`)
+    } catch (error) {
+      console.log(error)
+    }
+    onNext()
   }
+  useEffect(() => {
+    setImgClass('img-appear')
+    setTimeout(() => {
+      setImgClass('')
+    }, 2000)
+  }, [userId])
 
   if (!user) return null
   return (
@@ -45,7 +81,7 @@ const TinderCard = ({ userId, onLike, onPass }: Props) => {
           'Loading'
         ) : (
           <>
-            <img src={user.picture}></img>
+            <img src={user.picture} className={imgClass}></img>
             <div className="detail">
               {user.firstName} {user.lastName} {user.age}
             </div>
