@@ -88,8 +88,7 @@ userService.getById = (userId) => User.findById(userId);
 // To pick one user randomly as current user
 userService.initCurrentUserId = async () => {
   const count = await User.find().countDocuments();
-  //const random = Math.floor(Math.random() * count);
-  const random = 0;
+  const random = Math.floor(Math.random() * count);
   const user = await User.findOne().skip(random).lean();
   return user._id.toString();
 };
