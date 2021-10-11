@@ -86,7 +86,7 @@ This is an instruction on setting up your project locally.
 1. Clone the repo
 
    ```bash
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Minhchau0108/tinder-app.git
    ```
 
 2. Go to `backend` folder:
