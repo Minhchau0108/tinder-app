@@ -14,6 +14,7 @@
 <!-- ABOUT THE PROJECT -->
 
 # About The Project
+![Alt Text](https://media.giphy.com/media/L2aBQMykflZUUTGwLw/giphy.gif)
 
 ### Built With
 
