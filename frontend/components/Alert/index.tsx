@@ -18,7 +18,7 @@ const Alert = () => {
             color: '#fff',
           },
           success: {
-            duration: 2000,
+            duration: 1000,
             icon: '👏',
             theme: {
               primary: 'green',
@@ -26,7 +26,7 @@ const Alert = () => {
             },
           },
           error: {
-            duration: 2000,
+            duration: 1000,
             icon: '💔',
             theme: {
               primary: 'green',
